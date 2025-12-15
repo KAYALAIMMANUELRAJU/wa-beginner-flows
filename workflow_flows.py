@@ -19,6 +19,9 @@ def validate(data):
 
 @flow
 def etl_flow(job_name: str = "Daily ETL"):
+    raw = extract()
+    processed = transform(raw)
+    load(f"{job_name}: {processed}")
     processed = transform(raw)
     validated = validate(processed)
     load(validated)
